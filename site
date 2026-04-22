@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-secondary-fixed": "#002113",
+                  "inverse-primary": "#68dba9",
+                  "surface-container": "#e9efe9",
+                  "secondary-fixed": "#6ffbbe",
+                  "background": "#f5fbf5",
+                  "secondary": "#006c49",
+                  "surface-bright": "#f5fbf5",
+                  "outline-variant": "#bccac0",
+                  "tertiary-fixed-dim": "#ffb3ae",
+                  "surface-variant": "#dee4de",
+                  "outline": "#6d7a72",
+                  "on-primary": "#ffffff",
+                  "on-secondary-container": "#00714d",
+                  "on-primary-container": "#f5fff7",
+                  "tertiary-fixed": "#ffdad7",
+                  "on-primary-fixed-variant": "#005137",
+                  "inverse-surface": "#2c322e",
+                  "surface": "#f5fbf5",
+                  "on-error": "#ffffff",
+                  "primary-container": "#00855d",
+                  "tertiary-container": "#ba5551",
+                  "primary-fixed-dim": "#68dba9",
+                  "on-tertiary-fixed-variant": "#7f2928",
+                  "on-background": "#171d19",
+                  "tertiary": "#9b3e3b",
+                  "on-tertiary-container": "#fffbff",
+                  "surface-container-high": "#e4eae4",
+                  "on-secondary-fixed-variant": "#005236",
+                  "surface-dim": "#d5dcd6",
+                  "primary": "#006948",
+                  "surface-container-low": "#eff5ef",
+                  "error": "#ba1a1a",
+                  "on-secondary": "#ffffff",
+                  "secondary-container": "#6cf8bb",
+                  "on-tertiary-fixed": "#410004",
+                  "error-container": "#ffdad6",
+                  "surface-container-lowest": "#ffffff",
+                  "primary-fixed": "#85f8c4",
+                  "inverse-on-surface": "#ecf2ec",
+                  "surface-tint": "#006c4a",
+                  "on-tertiary": "#ffffff",
+                  "on-surface-variant": "#3d4a42",
+                  "surface-container-highest": "#dee4de",
+                  "secondary-fixed-dim": "#4edea3",
+                  "on-error-container": "#93000a",
+                  "on-surface": "#171d19",
+                  "on-primary-fixed": "#002114"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "2xl": "1rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "xs": "0.25rem",
+                  "unit": "4px",
+                  "container-margin": "1.25rem",
+                  "sm": "0.5rem",
+                  "gutter": "1rem",
+                  "lg": "1.5rem",
+                  "xl": "2rem",
+                  "md": "1rem"
+          },
+          "fontFamily": {
+                  "label-caps": ["Inter"],
+                  "button": ["Inter"],
+                  "body-md": ["Inter"],
+                  "h3": ["Inter"],
+                  "body-lg": ["Inter"],
+                  "body-sm": ["Inter"],
+                  "h1": ["Inter"],
+                  "h2": ["Inter"]
+          },
+          "fontSize": {
+                  "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                  "button": ["16px", {"lineHeight": "1", "fontWeight": "600"}],
+                  "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                  "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                  "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                  "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                  "h1": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "h2": ["30px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-surface-container-lowest text-on-surface">
+<!-- TopNavBar Execution -->
+<nav class="fixed top-0 w-full z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm shadow-slate-200/50 dark:shadow-none flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black tracking-tighter text-emerald-600 dark:text-emerald-500">MMU RideShare</span>
+<div class="hidden md:flex items-center bg-slate-100 dark:bg-slate-800 rounded-full px-4 py-2 w-96">
+<span class="material-symbols-outlined text-slate-400 mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full font-body-sm" placeholder="Search for rides, routes or help..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors duration-200 text-slate-500">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors duration-200 text-slate-500">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-slate-200">
+<img alt="User profile photo" class="h-full w-full object-cover" data-alt="professional headshot of a young male university student smiling slightly, clear bright indoor lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0OhFismhw8KAFTU3grwUqGEnFXCU2YEvJwzFtG6v2LsShZazCBG8D2hgJ4BGdNe89A1an4wa_NrOf97OST6XOj1z_L2sYNWAObibx3dhWDjm94RhpWHt718AxdUiIbv7Cb8JyC2A20ncDYeciFWiwo1SWeZCgdPemXEl1UQ40bLL2-eiZvRD7llQVCKfgxdXnTJWI-teq0Gle2iewOrmKjEN66aLQyU3pJr7x0d3q28WESo_8t2z3jr9q60LhqhPiTtx03AMt"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar Execution -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col pt-8 pb-4 space-y-2">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="h-10 w-10 rounded-full overflow-hidden ring-2 ring-emerald-500 ring-offset-2">
+<img alt="Verified Student Avatar" class="h-full w-full object-cover" data-alt="Close up of a friendly male student face, academic setting background, clean corporate style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtIGWqacvrAZtxNJxBVDqwnZB0h4jDNzzZM8vLnUlWU8AwLf7oYf6onCohy_IovC2_r_-niq5XsKCp5hmUmUiwbYTZgQ5pqiQNW0IUetehkBgD1LaAP4h7RlxWc5U7wuyOUuZLKxW136BnVQ0klaMZrrufJbeuhXcZ_9ZEtP7KA7iLCXeU82ZkByXjKeIy6X1FmnKVEzkcoDrQvzu_LrLfELKYhPRn9xzzc0WBzSJso5mtIGrj1-O9XapdKlKgdsYDfy46ToUZ"/>
+</div>
+<div>
+<p class="font-bold text-sm text-on-surface">Alex Johnson</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-600" data-icon="verified" data-weight="fill">verified</span>
+<p class="text-[10px] uppercase tracking-wider font-semibold text-slate-500">Verified Student</p>
+</div>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<a class="bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-r-4 border-emerald-600 rounded-r-lg flex items-center px-6 py-3 transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="grid_view">grid_view</span>
+<span class="font-['Inter'] text-[14px] font-medium">Dashboard</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 flex items-center px-6 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="search">search</span>
+<span class="font-['Inter'] text-[14px] font-medium">Search Rides</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 flex items-center px-6 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="directions_car">directions_car</span>
+<span class="font-['Inter'] text-[14px] font-medium">My Bookings</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 flex items-center px-6 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-['Inter'] text-[14px] font-medium">Messages</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 flex items-center px-6 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="verified_user">verified_user</span>
+<span class="font-['Inter'] text-[14px] font-medium">Safety Center</span>
+</a>
+</div>
+<div class="px-6 py-4">
+<button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-button text-button py-3 rounded-xl transition-all shadow-md shadow-emerald-200 active:scale-95">
+        Post a Ride
+      </button>
+</div>
+<div class="pt-4 mt-auto border-t border-slate-100">
+<a class="text-slate-600 dark:text-slate-400 flex items-center px-6 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="support">support</span>
+<span class="font-['Inter'] text-[14px] font-medium">Help Support</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 flex items-center px-6 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="logout">logout</span>
+<span class="font-['Inter'] text-[14px] font-medium">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-20 px-8 pb-12 min-h-screen bg-slate-50">
+<div class="max-w-6xl mx-auto space-y-8">
+<!-- Welcome Header -->
+<section>
+<h1 class="font-h1 text-h1 text-on-surface">Good morning, Alex.</h1>
+<p class="font-body-lg text-body-lg text-outline mt-2">Where are we heading on campus today?</p>
+</section>
+<!-- Ride Finding Search Grid -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter bg-white p-gutter rounded-2xl shadow-lg shadow-slate-200/40 border border-slate-100">
+<div class="md:col-span-5 flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-outline uppercase">Pickup Location</label>
+<div class="flex items-center border-2 border-slate-100 rounded-xl px-4 py-3 focus-within:border-emerald-600 transition-colors">
+<span class="material-symbols-outlined text-slate-400 mr-3" data-icon="location_on">location_on</span>
+<input class="w-full border-none focus:ring-0 p-0 text-body-md font-body-md" placeholder="Current location or address" type="text"/>
+</div>
+</div>
+<div class="md:col-span-1 flex items-center justify-center pt-6">
+<span class="material-symbols-outlined text-slate-300" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<div class="md:col-span-4 flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-outline uppercase">MMU Gate / Building</label>
+<div class="flex items-center border-2 border-slate-100 rounded-xl px-4 py-3 focus-within:border-emerald-600 transition-colors">
+<span class="material-symbols-outlined text-slate-400 mr-3" data-icon="school">school</span>
+<input class="w-full border-none focus:ring-0 p-0 text-body-md font-body-md" placeholder="Main Gate, Block B..." type="text"/>
+</div>
+</div>
+<div class="md:col-span-2 flex items-end">
+<button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-button text-button h-[52px] rounded-xl transition-all shadow-md active:scale-95">
+            Search
+          </button>
+</div>
+</section>
+<!-- Verified Drivers Carousel/Section -->
+<section class="space-y-4">
+<div class="flex justify-between items-center">
+<h2 class="font-h2 text-h2 text-on-surface">Verified Drivers Near You</h2>
+<button class="text-emerald-600 font-button text-body-sm hover:underline">View All Drivers</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Driver Card 1 -->
+<div class="bg-white border border-slate-200 rounded-2xl p-lg space-y-4 hover:shadow-xl hover:shadow-slate-200/50 transition-all group">
+<div class="flex justify-between items-start">
+<div class="relative">
+<div class="h-16 w-16 rounded-full overflow-hidden ring-2 ring-white shadow-md">
+<img alt="Driver Avatar" class="h-full w-full object-cover" data-alt="Portrait of a friendly young male student with glasses, smiling confidently, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4UJ7wfL4Wl1ENs2xjeITts0pdMMbc51deNcBczl-yjcwzJU5gEOpvNxDia0XEDyBWabKtOf10wbiw96ufiNdwzea2ibgLrByzo-8PzyhY8oyLmHcWdDSbiXyOoW8m_qYtMKe4QN1D6m8ON6iPkTjxPDEgxPsSVcDHvkVeJDGeYAORNpVHOqLwsK50q6nkmOJZm1jo07bJCfvgon5BzJUPhWXbB0ZnGz8LkXuO7kltyLfLXj8u5mKmQ5pX3Kq4wJTrg3RnMa1J"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-emerald-600 text-white p-1 rounded-full border-2 border-white">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill">verified</span>
+</div>
+</div>
+<div class="bg-amber-50 text-amber-600 px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="star" data-weight="fill">star</span>
+<span class="font-bold text-sm">4.9</span>
+<span class="text-[10px] text-amber-500 font-medium">(128)</span>
+</div>
+</div>
+<div>
+<h3 class="font-h3 text-[18px] text-on-surface">David Chen</h3>
+<p class="font-body-sm text-outline">Computer Science • Senior Year</p>
+</div>
+<div class="flex items-center gap-3 py-2 border-y border-slate-50">
+<span class="material-symbols-outlined text-slate-400" data-icon="directions_car">directions_car</span>
+<span class="font-body-sm text-slate-600">Toyota Corolla • <span class="font-mono text-[12px] bg-slate-100 px-1 rounded">WAE 4210</span></span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-widest">Starts from</span>
+<span class="text-emerald-600 font-bold text-lg">RM 5.00</span>
+</div>
+<button class="bg-slate-50 text-emerald-600 font-button px-4 py-2 rounded-lg hover:bg-emerald-600 hover:text-white transition-all">Book Ride</button>
+</div>
+</div>
+<!-- Driver Card 2 -->
+<div class="bg-white border border-slate-200 rounded-2xl p-lg space-y-4 hover:shadow-xl hover:shadow-slate-200/50 transition-all group">
+<div class="flex justify-between items-start">
+<div class="relative">
+<div class="h-16 w-16 rounded-full overflow-hidden ring-2 ring-white shadow-md">
+<img alt="Driver Avatar" class="h-full w-full object-cover" data-alt="Close up portrait of a young female student with long hair, bright outdoor park background, warm sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYc6GN4vV6ESSTBTVAF9VhDSD-ARTRPXLMmav2NA7reM9xMMhJeW8-Y8o4bU2TPytmbcW9G5eQOOeSTq9E00JLvJEVLpDr2-f7bLUDClM8-WwyQ9uhKceN3GeUl24GOjOfIJSwuN7Fkke6G0JxwoASRGoKg4Qfxby0XBEbN3XNlAXpPQHN57ggiqcGBc6JiIl7xd_sN-QawYIoTTUydvJ858Nnt0LaSn0qWITF0x-4tGhgTvl4pcxCjkuOG531KMpd7pIaVXwT"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-emerald-600 text-white p-1 rounded-full border-2 border-white">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill">verified</span>
+</div>
+</div>
+<div class="bg-amber-50 text-amber-600 px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="star" data-weight="fill">star</span>
+<span class="font-bold text-sm">5.0</span>
+<span class="text-[10px] text-amber-500 font-medium">(84)</span>
+</div>
+</div>
+<div>
+<h3 class="font-h3 text-[18px] text-on-surface">Sarah Lim</h3>
+<p class="font-body-sm text-outline">Business Admin • Junior Year</p>
+</div>
+<div class="flex items-center gap-3 py-2 border-y border-slate-50">
+<span class="material-symbols-outlined text-slate-400" data-icon="directions_car">directions_car</span>
+<span class="font-body-sm text-slate-600">Honda City • <span class="font-mono text-[12px] bg-slate-100 px-1 rounded">VBN 8821</span></span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-widest">Starts from</span>
+<span class="text-emerald-600 font-bold text-lg">RM 6.00</span>
+</div>
+<button class="bg-slate-50 text-emerald-600 font-button px-4 py-2 rounded-lg hover:bg-emerald-600 hover:text-white transition-all">Book Ride</button>
+</div>
+</div>
+<!-- Driver Card 3 -->
+<div class="bg-white border border-slate-200 rounded-2xl p-lg space-y-4 hover:shadow-xl hover:shadow-slate-200/50 transition-all group">
+<div class="flex justify-between items-start">
+<div class="relative">
+<div class="h-16 w-16 rounded-full overflow-hidden ring-2 ring-white shadow-md">
+<img alt="Driver Avatar" class="h-full w-full object-cover" data-alt="Portrait of a male student wearing a polo shirt, clean professional university background, soft overhead lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfzYvPjD3TLyv0Ut0AIRv1k0cAwqATD6e2uwbx8Q-bMzi7Q7xveRyoffX6QKLRwx4FjX1yvxe_UrKRg3ZRhHtJa5T3u2o3GS2WyByEGW06G3TRAuIH3aW8vxwcprVUqQUATu3FbG0qiKpKCoS7aNmeKYwnQ8xil6VLQcWR1oan7cYMIVjnxZowH-hihCb0M5-hjrl7XkZShl8CTM5ZapzL3TWvZUOqFtNCmBdzK5oIEvwOD8fo3nJ2zu1KuHg_uKK-RxumRLkG"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-emerald-600 text-white p-1 rounded-full border-2 border-white">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill">verified</span>
+</div>
+</div>
+<div class="bg-amber-50 text-amber-600 px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="star" data-weight="fill">star</span>
+<span class="font-bold text-sm">4.8</span>
+<span class="text-[10px] text-amber-500 font-medium">(210)</span>
+</div>
+</div>
+<div>
+<h3 class="font-h3 text-[18px] text-on-surface">Zackary Tan</h3>
+<p class="font-body-sm text-outline">Engineering • Senior Year</p>
+</div>
+<div class="flex items-center gap-3 py-2 border-y border-slate-50">
+<span class="material-symbols-outlined text-slate-400" data-icon="directions_car">directions_car</span>
+<span class="font-body-sm text-slate-600">Perodua Bezza • <span class="font-mono text-[12px] bg-slate-100 px-1 rounded">KLP 1520</span></span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-widest">Starts from</span>
+<span class="text-emerald-600 font-bold text-lg">RM 4.50</span>
+</div>
+<button class="bg-slate-50 text-emerald-600 font-button px-4 py-2 rounded-lg hover:bg-emerald-600 hover:text-white transition-all">Book Ride</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Promo & Statistics Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Invite Friends Section -->
+<div class="md:col-span-8 bg-emerald-600 rounded-2xl p-xl flex relative overflow-hidden text-white shadow-xl">
+<div class="z-10 flex flex-col justify-center max-w-md">
+<h2 class="font-h2 text-h2 mb-4">Invite friends, get RM10 credits</h2>
+<p class="font-body-md mb-6 opacity-90">Help your MMU peers get around safely. Share your referral code and both of you will earn credits for your next campus ride.</p>
+<div class="flex gap-4">
+<div class="bg-white/20 backdrop-blur-md rounded-xl px-4 py-2 border border-white/30 flex items-center gap-3">
+<span class="font-mono font-bold tracking-widest">MMUALEX24</span>
+<button class="material-symbols-outlined hover:text-emerald-200 transition-colors" data-icon="content_copy">content_copy</button>
+</div>
+<button class="bg-white text-emerald-600 font-button px-6 py-2 rounded-xl hover:bg-emerald-50 active:scale-95 transition-all">Invite Now</button>
+</div>
+</div>
+<!-- Abstract Background Element -->
+<div class="absolute right-0 top-0 h-full w-1/3 bg-emerald-500/30 -skew-x-12 transform translate-x-12"></div>
+<div class="absolute right-10 bottom-0 opacity-20">
+<span class="material-symbols-outlined text-[160px]" data-icon="group">group</span>
+</div>
+</div>
+<!-- Trust Stats Card -->
+<div class="md:col-span-4 bg-white border border-slate-200 rounded-2xl p-lg flex flex-col justify-between shadow-lg shadow-slate-100">
+<div class="space-y-4">
+<p class="font-label-caps text-label-caps text-emerald-600 uppercase tracking-widest">Safety Summary</p>
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-outline font-body-sm">Verified Members</span>
+<span class="font-bold text-on-surface">2,450+</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full w-[85%]"></div>
+</div>
+<div class="flex justify-between items-center pt-2">
+<span class="text-outline font-body-sm">Safe Arrivals</span>
+<span class="font-bold text-on-surface">99.9%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full w-[99.9%]"></div>
+</div>
+</div>
+</div>
+<div class="bg-emerald-50 p-4 rounded-xl mt-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-600" data-icon="verified_user" data-weight="fill">verified_user</span>
+<span class="font-body-sm font-semibold text-emerald-700">Insurance Active</span>
+</div>
+<p class="text-[12px] text-emerald-600/70 mt-1">Every shared ride is covered by the student community safety protocol.</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Mobile Bottom Nav (Suppressed on Web but structured for responsive integrity if needed) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-slate-100 px-6 py-3 flex justify-between items-center z-50">
+<button class="flex flex-col items-center text-emerald-600">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="text-[10px] font-medium mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="text-[10px] font-medium mt-1">Search</span>
+</button>
+<div class="relative -top-8 bg-emerald-600 p-4 rounded-full shadow-lg shadow-emerald-200 ring-4 ring-white">
+<span class="material-symbols-outlined text-white" data-icon="add">add</span>
+</div>
+<button class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<span class="text-[10px] font-medium mt-1">Rides</span>
+</button>
+<button class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-medium mt-1">Profile</span>
+</button>
+</div>
+</body></html>
