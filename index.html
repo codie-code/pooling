@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>MMU RideShare</title>
+    <title>MMU RideShare | Student Carpooling</title>
+    
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -20,106 +21,198 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#006948",
-                        "emerald-600": "#006c4a", // Matching your previous MMU theme
-                        "on-surface": "#171d19",
+                        'deep-teal': '#008D62',     /* 10% - Accents/Buttons */
+                        'mint-green': '#C1F0D4',    /* 30% - Secondary/Cards */
+                        'pale-aqua': '#E1FAE9',     /* 60% - Backgrounds */
+                    },
+                    borderRadius: {
+                        'brand': '2rem',
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-white text-on-surface">
-    <nav class="fixed top-0 w-full z-50 bg-white border-b border-slate-100 h-20 flex justify-between items-center px-8 md:px-20">
+<body class="bg-pale-aqua text-slate-800">
+
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-mint-green h-20 flex justify-between items-center px-8 md:px-20">
         <div class="flex items-center gap-10">
-            <span class="text-2xl font-black tracking-tighter text-emerald-600">MMU RideShare</span>
+            <span class="text-2xl font-black tracking-tighter text-deep-teal">MMU RideShare</span>
             <div class="hidden lg:flex gap-8 text-sm font-bold text-slate-600">
-                <a href="#" class="hover:text-emerald-600">Ride</a>
-                <a href="#" class="hover:text-emerald-600">Drive</a>
-                <a href="#" class="hover:text-emerald-600">Safety</a>
+                <a href="#how-it-works" class="hover:text-deep-teal transition-colors">How it works</a>
+                <a href="#services" class="hover:text-deep-teal transition-colors">Services</a>
+                <a href="#" class="hover:text-deep-teal transition-colors">Safety</a>
             </div>
         </div>
         <div class="flex items-center gap-6">
             <button class="text-sm font-bold text-slate-700">Login</button>
-            <button class="bg-emerald-600 text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-emerald-700 transition-all">
+            <button class="bg-deep-teal text-white px-6 py-2.5 rounded-full font-bold text-sm hover:opacity-90 shadow-lg shadow-deep-teal/20 transition-all">
                 Sign Up
             </button>
         </div>
     </nav>
 
-    <section class="pt-32 pb-20 px-6 bg-slate-50 min-h-[600px] flex flex-col items-center justify-center relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-1/3 h-full bg-emerald-50/50 -skew-x-12 translate-x-20"></div>
-        <div class="max-w-4xl w-full z-10">
-            <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-8 leading-tight">
-                Going somewhere, <br><span class="text-emerald-600">Alex?</span>
+    <section class="pt-40 pb-20 px-8 md:px-20 min-h-[700px] flex flex-col lg:flex-row items-center gap-16 max-w-7xl mx-auto">
+        <div class="flex-1 space-y-8">
+            <div class="inline-block bg-mint-green text-deep-teal text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest">
+                Exclusive for MMU Students
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black text-slate-900 leading-tight">
+                Going somewhere, <br><span class="text-deep-teal">Alex?</span>
             </h1>
-
-            <div class="bg-white p-4 md:p-8 rounded-3xl shadow-2xl shadow-emerald-900/10 border border-slate-100">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div class="relative">
-                        <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-emerald-600">radio_button_checked</span>
-                        <input type="text" placeholder="Current Location" class="w-full pl-12 pr-4 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-emerald-500 font-medium">
-                    </div>
-                    <div class="relative">
-                        <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-rose-500">location_on</span>
-                        <input type="text" placeholder="Where to? (e.g. MMU Gate B)" class="w-full pl-12 pr-4 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-emerald-500 font-medium">
-                    </div>
-                </div>
-                <button class="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black text-lg hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200">
-                    Find Rides Now
+            <p class="text-lg text-slate-600 leading-relaxed max-w-md">
+                The safest way to travel between campuses. Share a ride with verified peers and save on your daily commute.
+            </p>
+            <div class="flex gap-4">
+                <button class="bg-deep-teal text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-deep-teal/30 hover:-translate-y-1 transition-all">
+                    Find Rides
+                </button>
+                <button class="bg-white border-2 border-mint-green text-slate-700 px-8 py-4 rounded-2xl font-bold hover:bg-mint-green transition-all">
+                    Offer a Ride
                 </button>
             </div>
         </div>
-    </section>
 
-    <section class="max-w-7xl mx-auto px-6 py-20">
-        <h2 class="text-2xl font-black mb-10 text-slate-800">Explore Services</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div class="bg-white border border-slate-100 p-8 rounded-3xl hover:shadow-xl hover:border-emerald-100 transition-all cursor-pointer group">
-                <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 transition-colors">
-                    <span class="material-symbols-outlined text-3xl text-emerald-600 group-hover:text-white">directions_car</span>
+        <div class="flex-1 w-full max-w-md">
+            <div class="bg-mint-green p-8 rounded-[40px] shadow-2xl shadow-deep-teal/5 border border-white">
+                <h3 class="text-xl font-black mb-8 text-slate-900">Book your next ride</h3>
+                <div class="space-y-4">
+                    <div class="relative bg-white p-4 rounded-2xl flex items-center gap-4 group focus-within:ring-2 focus-within:ring-deep-teal transition-all">
+                        <span class="material-symbols-outlined text-deep-teal">radio_button_checked</span>
+                        <input type="text" placeholder="Current Location" class="w-full border-none focus:ring-0 p-0 font-medium text-slate-700 placeholder:text-slate-400">
+                    </div>
+                    <div class="relative bg-white p-4 rounded-2xl flex items-center gap-4 group focus-within:ring-2 focus-within:ring-deep-teal transition-all">
+                        <span class="material-symbols-outlined text-rose-500">location_on</span>
+                        <input type="text" placeholder="Where to? (e.g. MMU Gate B)" class="w-full border-none focus:ring-0 p-0 font-medium text-slate-700 placeholder:text-slate-400">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-2xl flex items-center gap-4">
+                            <span class="material-symbols-outlined text-slate-400">calendar_today</span>
+                            <input type="text" placeholder="Today" class="w-full border-none focus:ring-0 p-0 text-sm font-medium">
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl flex items-center gap-4">
+                            <span class="material-symbols-outlined text-slate-400">group</span>
+                            <input type="number" placeholder="1" class="w-full border-none focus:ring-0 p-0 text-sm font-medium">
+                        </div>
+                    </div>
+                    <button class="w-full bg-deep-teal text-white py-5 rounded-2xl font-black text-lg mt-4 shadow-lg shadow-deep-teal/20 hover:scale-[1.02] active:scale-95 transition-all">
+                        Find Rides Now
+                    </button>
                 </div>
-                <h3 class="font-bold text-lg">Daily Ride</h3>
-                <p class="text-sm text-slate-500 mt-2">Affordable inter-campus travel.</p>
-            </div>
-            <div class="bg-white border border-slate-100 p-8 rounded-3xl hover:shadow-xl hover:border-emerald-100 transition-all cursor-pointer group">
-                <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
-                    <span class="material-symbols-outlined text-3xl text-blue-600 group-hover:text-white">group</span>
-                </div>
-                <h3 class="font-bold text-lg">Carpool</h3>
-                <p class="text-sm text-slate-500 mt-2">Share costs with classmates.</p>
-            </div>
-            <div class="bg-white border border-slate-100 p-8 rounded-3xl hover:shadow-xl hover:border-emerald-100 transition-all cursor-pointer group">
-                <div class="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-amber-600 transition-colors">
-                    <span class="material-symbols-outlined text-3xl text-amber-600 group-hover:text-white">package_2</span>
-                </div>
-                <h3 class="font-bold text-lg">Express</h3>
-                <p class="text-sm text-slate-500 mt-2">Send books or items quickly.</p>
-            </div>
-            <div class="bg-white border border-slate-100 p-8 rounded-3xl hover:shadow-xl hover:border-emerald-100 transition-all cursor-pointer group">
-                <div class="w-16 h-16 bg-rose-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-rose-600 transition-colors">
-                    <span class="material-symbols-outlined text-3xl text-rose-600 group-hover:text-white">verified_user</span>
-                </div>
-                <h3 class="font-bold text-lg">Insurance</h3>
-                <p class="text-sm text-slate-500 mt-2">Every ride is protected.</p>
             </div>
         </div>
     </section>
 
-    <section class="max-w-7xl mx-auto px-6 pb-20">
-        <div class="bg-slate-900 rounded-[40px] p-10 md:p-20 text-white flex flex-col md:flex-row items-center gap-10 overflow-hidden relative">
-            <div class="z-10 flex-1">
-                <span class="bg-emerald-500 text-[10px] uppercase font-black px-3 py-1 rounded-full">New Feature</span>
-                <h2 class="text-3xl md:text-5xl font-black mt-4 mb-6">Drive for MMU & <br>Earn Credits</h2>
-                <p class="text-slate-400 text-lg mb-8 max-w-md">Turn your empty car seats into extra cash while helping the student community.</p>
-                <button class="bg-emerald-600 hover:bg-emerald-500 text-white px-10 py-4 rounded-full font-bold transition-all">
-                    Register as Driver
+    <section id="services" class="bg-white py-24 rounded-[60px] md:rounded-[100px] shadow-inner">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <h2 class="text-3xl font-black text-slate-900 mb-4">Explore our community services</h2>
+                    <p class="text-slate-500 max-w-md">Tailored transport solutions designed specifically for the MMU student lifestyle.</p>
+                </div>
+                <button class="text-deep-teal font-bold flex items-center gap-2 hover:underline">
+                    View all services <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
             </div>
-            <div class="flex-1 hidden md:block">
-                 <span class="material-symbols-outlined text-[200px] opacity-10 absolute right-10 bottom-0">payments</span>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-pale-aqua p-8 rounded-[32px] hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:bg-deep-teal transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-deep-teal group-hover:text-white">directions_car</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Daily Ride</h3>
+                    <p class="text-sm text-slate-600">Standard point-to-point travel between home and campus.</p>
+                </div>
+                <div class="bg-mint-green/30 p-8 rounded-[32px] hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group border border-mint-green/50">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:bg-deep-teal transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-deep-teal group-hover:text-white">group</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Carpool</h3>
+                    <p class="text-sm text-slate-600">Join a recurring group ride for your semester schedule.</p>
+                </div>
+                <div class="bg-pale-aqua p-8 rounded-[32px] hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:bg-deep-teal transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-deep-teal group-hover:text-white">package_2</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Express</h3>
+                    <p class="text-sm text-slate-600">Need to send a charger or book to a friend? Use Express.</p>
+                </div>
+                <div class="bg-mint-green/30 p-8 rounded-[32px] hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group border border-mint-green/50">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:bg-deep-teal transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-deep-teal group-hover:text-white">verified_user</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Safety+</h3>
+                    <p class="text-sm text-slate-600">Every ride is tracked and insured for student peace of mind.</p>
+                </div>
             </div>
         </div>
     </section>
+
+    <section id="how-it-works" class="py-24 max-w-7xl mx-auto px-8 text-center">
+        <h2 class="text-3xl font-black mb-16">Simple. Safe. Student-built.</h2>
+        <div class="grid md:grid-cols-3 gap-16">
+            <div class="space-y-4">
+                <div class="text-4xl font-black text-mint-green">01</div>
+                <h4 class="font-bold text-xl">Verify ID</h4>
+                <p class="text-slate-500 text-sm px-6">Sign up using your MMU student email to join the trusted network.</p>
+            </div>
+            <div class="space-y-4">
+                <div class="text-4xl font-black text-mint-green">02</div>
+                <h4 class="font-bold text-xl">Find & Book</h4>
+                <p class="text-slate-500 text-sm px-6">Enter your destination and pick a driver that matches your schedule.</p>
+            </div>
+            <div class="space-y-4">
+                <div class="text-4xl font-black text-mint-green">03</div>
+                <h4 class="font-bold text-xl">Ride & Save</h4>
+                <p class="text-slate-500 text-sm px-6">Travel together, split the fuel cost, and arrive safely at your gate.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-white pt-20 pb-10 rounded-t-[60px]">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-slate-800 pb-16">
+            <div class="col-span-1 md:col-span-2 space-y-6">
+                <span class="text-2xl font-black text-mint-green tracking-tighter">MMU RideShare</span>
+                <p class="text-slate-400 max-w-sm leading-relaxed">
+                    Designed for students at Multimedia University Malacca. We are committed to making campus commutes affordable and sustainable.
+                </p>
+            </div>
+            <div class="space-y-6">
+                <h5 class="font-bold text-lg">Contact Support</h5>
+                <ul class="text-slate-400 space-y-4 text-sm">
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-mint-green">mail</span>
+                        hello@mmuride.com
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-mint-green">call</span>
+                        +60 6-252 3500
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-mint-green">location_on</span>
+                        MMU, Melaka Campus
+                    </li>
+                </ul>
+            </div>
+            <div class="space-y-6">
+                <h5 class="font-bold text-lg">Quick Links</h5>
+                <ul class="text-slate-400 space-y-4 text-sm">
+                    <li><a href="#" class="hover:text-mint-green transition-colors">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-mint-green transition-colors">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-mint-green transition-colors">Driver Agreement</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-8 mt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-slate-500 text-xs">© 2026 MMU RideShare Project. Built by Hashim.</p>
+            <div class="flex gap-6 text-slate-500">
+                <a href="#" class="hover:text-white transition-colors"><span class="material-symbols-outlined">public</span></a>
+                <a href="#" class="hover:text-white transition-colors"><span class="material-symbols-outlined">chat</span></a>
+                <a href="#" class="hover:text-white transition-colors"><span class="material-symbols-outlined">share</span></a>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
