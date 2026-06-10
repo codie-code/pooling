@@ -3,27 +3,21 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>MMU RideShare | Student Carpooling</title>
-    
+    <title>MMU RideShare | Student Carpooling App</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'deep-teal': '#008D62',     /* 10% - Accents/Buttons */
-                        'mint-green': '#C1F0D4',    /* 30% - Secondary/Cards */
-                        'pale-aqua': '#E1FAE9',     /* 60% - Backgrounds */
+                        "primary": "#006948",
+                        "emerald-600": "#006c4a",
+                        "on-surface": "#171d19",
+                        'deep-teal': '#008D62',
+                        'mint-green': '#C1F0D4',
+                        'pale-aqua': '#E1FAE9',
                     },
                     borderRadius: {
                         'brand': '2rem',
@@ -32,163 +26,280 @@
             }
         }
     </script>
+    <style>
+        * { scroll-behavior: smooth; }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        .float { animation: float 4s ease-in-out infinite; }
+
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple::before {
+            content: '';
+            position: absolute;
+            top: var(--mouse-y, 50%);
+            left: var(--mouse-x, 50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            transform: translate(-50%,-50%) scale(0);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .ripple:active::before {
+            animation: rippleAnim 0.5s ease-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @keyframes rippleAnim {
+            0% { transform: translate(-50%,-50%) scale(0); opacity: 0.6; }
+            100% { transform: translate(-50%,-50%) scale(2); opacity: 0; }
+        }
+    </style>
 </head>
 <body class="bg-pale-aqua text-slate-800">
 
-    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-mint-green h-20 flex justify-between items-center px-8 md:px-20">
+    <nav id="navbar" class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-mint-green/50 h-20 flex justify-between items-center px-8 md:px-20 transition-all duration-300">
         <div class="flex items-center gap-10">
             <span class="text-2xl font-black tracking-tighter text-deep-teal">MMU RideShare</span>
             <div class="hidden lg:flex gap-8 text-sm font-bold text-slate-600">
-                <a href="#how-it-works" class="hover:text-deep-teal transition-colors">How it works</a>
-                <a href="#services" class="hover:text-deep-teal transition-colors">Services</a>
-                <a href="#" class="hover:text-deep-teal transition-colors">Safety</a>
+                <a href="#features" class="nav-link hover:text-deep-teal transition-colors">Features</a>
+                <a href="#pricing" class="nav-link hover:text-deep-teal transition-colors">Pricing</a>
+                <a href="#how-it-works" class="nav-link hover:text-deep-teal transition-colors">How it works</a>
             </div>
         </div>
         <div class="flex items-center gap-6">
-            <button class="text-sm font-bold text-slate-700">Login</button>
-            <button class="bg-deep-teal text-white px-6 py-2.5 rounded-full font-bold text-sm hover:opacity-90 shadow-lg shadow-deep-teal/20 transition-all">
-                Sign Up
+            <button class="app-btn text-sm font-bold text-slate-700 cursor-pointer hover:text-deep-teal transition-colors">Login</button>
+            <button class="app-btn bg-deep-teal text-white px-6 py-2.5 rounded-full font-bold text-sm hover:opacity-90 shadow-lg shadow-deep-teal/20 transition-all cursor-pointer ripple">
+                Get the App
             </button>
         </div>
     </nav>
 
-    <section class="pt-40 pb-20 px-8 md:px-20 min-h-[700px] flex flex-col lg:flex-row items-center gap-16 max-w-7xl mx-auto">
-        <div class="flex-1 space-y-8">
-            <div class="inline-block bg-mint-green text-deep-teal text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest">
-                Exclusive for MMU Students
+    <section class="relative overflow-hidden pt-40 pb-20 px-8 md:px-20 min-h-[700px] flex flex-col lg:flex-row items-center gap-16 max-w-7xl mx-auto">
+        <div class="absolute -top-40 -left-40 w-80 h-80 bg-mint-green/40 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-deep-teal/10 rounded-full blur-3xl"></div>
+
+        <div class="flex-1 space-y-8 relative z-10">
+            <div class="reveal visible inline-block bg-mint-green text-deep-teal text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest">
+                Built for MMU Melaka Students
             </div>
             <h1 class="text-5xl md:text-7xl font-black text-slate-900 leading-tight">
-                Going somewhere, <br><span class="text-deep-teal">Alex?</span>
+                Tired of<br><span class="text-deep-teal">expensive e-hailing?</span>
             </h1>
-            <p class="text-lg text-slate-600 leading-relaxed max-w-md">
-                The safest way to travel between campuses. Share a ride with verified peers and save on your daily commute.
+            <p class="text-lg text-slate-600 leading-relaxed max-w-lg">
+                MMU students without vehicles face high e-hailing prices. We built a community-driven carpooling platform — safe, affordable, and by students, for students.
             </p>
             <div class="flex gap-4">
-                <button class="bg-deep-teal text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-deep-teal/30 hover:-translate-y-1 transition-all">
-                    Find Rides
+                <button class="app-btn bg-deep-teal text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-deep-teal/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-deep-teal/40 transition-all cursor-pointer ripple">
+                    Download the App
                 </button>
-                <button class="bg-white border-2 border-mint-green text-slate-700 px-8 py-4 rounded-2xl font-bold hover:bg-mint-green transition-all">
-                    Offer a Ride
+                <button class="app-btn bg-white border-2 border-mint-green text-slate-700 px-8 py-4 rounded-2xl font-bold hover:bg-mint-green hover:border-deep-teal/20 hover:-translate-y-1 transition-all cursor-pointer ripple">
+                    Learn More
                 </button>
             </div>
         </div>
 
-        <div class="flex-1 w-full max-w-md">
-            <div class="bg-mint-green p-8 rounded-[40px] shadow-2xl shadow-deep-teal/5 border border-white">
-                <h3 class="text-xl font-black mb-8 text-slate-900">Book your next ride</h3>
-                <div class="space-y-4">
-                    <div class="relative bg-white p-4 rounded-2xl flex items-center gap-4 group focus-within:ring-2 focus-within:ring-deep-teal transition-all">
-                        <span class="material-symbols-outlined text-deep-teal">radio_button_checked</span>
-                        <input type="text" placeholder="Current Location" class="w-full border-none focus:ring-0 p-0 font-medium text-slate-700 placeholder:text-slate-400">
-                    </div>
-                    <div class="relative bg-white p-4 rounded-2xl flex items-center gap-4 group focus-within:ring-2 focus-within:ring-deep-teal transition-all">
-                        <span class="material-symbols-outlined text-rose-500">location_on</span>
-                        <input type="text" placeholder="Where to? (e.g. MMU Gate B)" class="w-full border-none focus:ring-0 p-0 font-medium text-slate-700 placeholder:text-slate-400">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white p-4 rounded-2xl flex items-center gap-4">
-                            <span class="material-symbols-outlined text-slate-400">calendar_today</span>
-                            <input type="text" placeholder="Today" class="w-full border-none focus:ring-0 p-0 text-sm font-medium">
-                        </div>
-                        <div class="bg-white p-4 rounded-2xl flex items-center gap-4">
-                            <span class="material-symbols-outlined text-slate-400">group</span>
-                            <input type="number" placeholder="1" class="w-full border-none focus:ring-0 p-0 text-sm font-medium">
-                        </div>
-                    </div>
-                    <button class="w-full bg-deep-teal text-white py-5 rounded-2xl font-black text-lg mt-4 shadow-lg shadow-deep-teal/20 hover:scale-[1.02] active:scale-95 transition-all">
-                        Find Rides Now
-                    </button>
-                </div>
+        <div class="flex-1 w-full max-w-md flex justify-center relative z-10">
+            <div class="float bg-mint-green p-10 rounded-[40px] shadow-2xl shadow-deep-teal/10 border border-white text-center w-full">
+                <span class="material-symbols-outlined text-6xl text-deep-teal mb-4">group</span>
+                <h3 class="text-2xl font-black text-slate-900 mb-2">Students helping students</h3>
+                <p class="text-slate-600 mb-6">Verified MMU peers. Cheaper than others. Safer than strangers.</p>
+                <button class="app-btn w-full bg-deep-teal text-white py-5 rounded-2xl font-black text-lg shadow-lg shadow-deep-teal/20 hover:scale-[1.02] hover:shadow-xl hover:shadow-deep-teal/30 active:scale-95 transition-all cursor-pointer ripple">
+                    Join the Community
+                </button>
             </div>
         </div>
     </section>
 
-    <section id="services" class="bg-white py-24 rounded-[60px] md:rounded-[100px] shadow-inner">
+    <section id="features" class="relative bg-white py-24 md:py-32">
         <div class="max-w-7xl mx-auto px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                <div>
-                    <h2 class="text-3xl font-black text-slate-900 mb-4">Explore our community services</h2>
-                    <p class="text-slate-500 max-w-md">Tailored transport solutions designed specifically for the MMU student lifestyle.</p>
+            <div class="reveal text-center mb-20">
+                <span class="inline-block bg-mint-green text-deep-teal text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-6">App Features</span>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-4">Your ride, your way</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto text-lg">Three simple steps from doorstep to destination.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="reveal reveal-delay-1 group relative bg-white rounded-3xl overflow-hidden border border-slate-100 hover:border-deep-teal/20 hover:shadow-2xl hover:shadow-deep-teal/10 hover:-translate-y-1 transition-all duration-300">
+                    <div class="relative h-48 bg-gradient-to-br from-pale-aqua to-mint-green/50 flex items-center justify-center overflow-hidden">
+                        <div class="w-20 h-20 bg-white/90 rounded-2xl flex items-center justify-center shadow-lg shadow-deep-teal/10 group-hover:scale-110 group-hover:bg-deep-teal transition-all duration-300 z-10">
+                            <span class="material-symbols-outlined text-4xl text-deep-teal group-hover:text-white transition-colors duration-300">dashboard</span>
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-deep-teal/5 rounded-full blur-2xl"></div>
+                        <span class="absolute top-4 left-4 bg-deep-teal text-white text-xs font-black px-3 py-1 rounded-full">Step 1</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 group-hover:text-deep-teal transition-colors">Dashboard & Wallet</h3>
+                        <ul class="text-sm text-slate-500 space-y-2">
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-deep-teal text-base">check_circle</span> Wallet Balance with Top Up</li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-deep-teal text-base">check_circle</span> Promo banners & rewards</li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-deep-teal text-base">check_circle</span> "Book a Ride" from home</li>
+                        </ul>
+                    </div>
                 </div>
-                <button class="text-deep-teal font-bold flex items-center gap-2 hover:underline">
-                    View all services <span class="material-symbols-outlined">arrow_forward</span>
+
+                <div class="reveal reveal-delay-2 group relative bg-white rounded-3xl overflow-hidden border border-slate-100 hover:border-deep-teal/20 hover:shadow-2xl hover:shadow-deep-teal/10 hover:-translate-y-1 transition-all duration-300">
+                    <div class="relative h-48 bg-gradient-to-br from-mint-green/50 to-pale-aqua flex items-center justify-center overflow-hidden">
+                        <div class="w-20 h-20 bg-white/90 rounded-2xl flex items-center justify-center shadow-lg shadow-deep-teal/10 group-hover:scale-110 group-hover:bg-deep-teal transition-all duration-300 z-10">
+                            <span class="material-symbols-outlined text-4xl text-deep-teal group-hover:text-white transition-colors duration-300">route</span>
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-deep-teal/5 rounded-full blur-2xl"></div>
+                        <span class="absolute top-4 left-4 bg-deep-teal text-white text-xs font-black px-3 py-1 rounded-full">Step 2</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 group-hover:text-deep-teal transition-colors">Book Your Ride</h3>
+                        <ul class="text-sm text-slate-500 space-y-2">
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-deep-teal text-base">check_circle</span> Pickup point & destination</li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-deep-teal text-base">check_circle</span> Max 15km distance enforced</li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-deep-teal text-base">check_circle</span> Choose passengers (1-4)</li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-deep-teal text-base">check_circle</span> Pay via Wallet, Cash, or Card</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="reveal reveal-delay-3 group relative bg-white rounded-3xl overflow-hidden border border-slate-100 hover:border-deep-teal/20 hover:shadow-2xl hover:shadow-deep-teal/10 hover:-translate-y-1 transition-all duration-300">
+                    <div class="relative h-48 bg-gradient-to-br from-pale-aqua to-mint-green/50 flex items-center justify-center overflow-hidden">
+                        <div class="w-20 h-20 bg-white/90 rounded-2xl flex items-center justify-center shadow-lg shadow-deep-teal/10 group-hover:scale-110 group-hover:bg-deep-teal transition-all duration-300 z-10">
+                            <span class="material-symbols-outlined text-4xl text-deep-teal group-hover:text-white transition-colors duration-300">person_pin</span>
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-deep-teal/5 rounded-full blur-2xl"></div>
+                        <span class="absolute top-4 left-4 bg-deep-teal text-white text-xs font-black px-3 py-1 rounded-full">Step 3</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 group-hover:text-deep-teal transition-colors">Driver Matching</h3>
+                        <ul class="text-sm text-slate-500 space-y-2">
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-deep-teal text-base">check_circle</span> Driver name, rating & vehicle</li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-deep-teal text-base">check_circle</span> ETA & plate number displayed</li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-deep-teal text-base">check_circle</span> Call or message your driver</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-24 max-w-7xl mx-auto px-8">
+        <div class="reveal text-center mb-20">
+            <span class="inline-block bg-mint-green text-deep-teal text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-6">Pricing</span>
+            <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-4">Choose your plan</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto text-lg">Always cheaper than standard e-hailing rates. Fuel subsidies for drivers keep fares low.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="reveal reveal-delay-1 relative bg-white rounded-[40px] p-10 border border-slate-100 hover:shadow-2xl hover:shadow-deep-teal/10 hover:-translate-y-1 transition-all">
+                <div class="w-16 h-16 bg-pale-aqua rounded-2xl flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-3xl text-deep-teal">person</span>
+                </div>
+                <h3 class="text-2xl font-black mb-2">Free</h3>
+                <p class="text-slate-500 text-sm mb-6">Perfect for occasional riders</p>
+                <div class="text-4xl font-black text-slate-900 mb-8">RM 1<span class="text-lg font-bold text-slate-400"> / trip</span></div>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-deep-teal">check</span><span class="text-slate-600">RM 1 service fee per trip</span></li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-deep-teal">check</span><span class="text-slate-600">Campus-based advertisements</span></li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-deep-teal">check</span><span class="text-slate-600">Standard ride matching</span></li>
+                </ul>
+                <button class="app-btn mt-8 w-full bg-pale-aqua text-deep-teal py-4 rounded-2xl font-bold hover:bg-mint-green transition-all cursor-pointer">
+                    Get Started Free
                 </button>
             </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-pale-aqua p-8 rounded-[32px] hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group">
-                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:bg-deep-teal transition-colors">
-                        <span class="material-symbols-outlined text-3xl text-deep-teal group-hover:text-white">directions_car</span>
-                    </div>
-                    <h3 class="font-bold text-xl mb-2">Daily Ride</h3>
-                    <p class="text-sm text-slate-600">Standard point-to-point travel between home and campus.</p>
+
+            <div class="reveal reveal-delay-2 relative bg-deep-teal rounded-[40px] p-10 text-white shadow-2xl shadow-deep-teal/30 hover:-translate-y-1 transition-all">
+                <div class="absolute top-4 right-4 bg-mint-green text-deep-teal text-xs font-black px-3 py-1 rounded-full">Popular</div>
+                <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-3xl">star</span>
                 </div>
-                <div class="bg-mint-green/30 p-8 rounded-[32px] hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group border border-mint-green/50">
-                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:bg-deep-teal transition-colors">
-                        <span class="material-symbols-outlined text-3xl text-deep-teal group-hover:text-white">group</span>
+                <h3 class="text-2xl font-black mb-2">VIP</h3>
+                <p class="text-white/70 text-sm mb-6">For daily commuters</p>
+                <div class="text-4xl font-black mb-8">RM 14.90<span class="text-lg font-bold text-white/60"> / month</span></div>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-mint-green">check</span><span class="text-white/90">No per-trip service fee</span></li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-mint-green">check</span><span class="text-white/90">Ad-free experience</span></li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-mint-green">check</span><span class="text-white/90">Priority driver matching</span></li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-mint-green">check</span><span class="text-white/90">Exclusive promos & rewards</span></li>
+                </ul>
+                <button class="app-btn mt-8 w-full bg-white text-deep-teal py-4 rounded-2xl font-bold hover:bg-mint-green transition-all cursor-pointer ripple">
+                    Go VIP
+                </button>
+            </div>
+        </div>
+
+        <div class="reveal mt-12 text-center">
+            <div class="inline-flex items-center gap-3 bg-mint-green/50 px-6 py-3 rounded-full text-sm font-bold text-deep-teal">
+                <span class="material-symbols-outlined">local_gas_station</span>
+                Verified student drivers get fuel subsidies to keep fares lower than market rates
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="bg-white py-24 rounded-[60px] md:rounded-[100px]">
+        <div class="max-w-7xl mx-auto px-8 text-center">
+            <div class="reveal mb-16">
+                <span class="inline-block bg-mint-green text-deep-teal text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-6">How It Works</span>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-4">Get started in minutes</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-16">
+                <div class="reveal reveal-delay-1 space-y-4 group">
+                    <div class="text-6xl font-black text-mint-green group-hover:text-deep-teal transition-colors">01</div>
+                    <div class="w-16 h-16 bg-pale-aqua rounded-2xl flex items-center justify-center mx-auto group-hover:bg-deep-teal group-hover:scale-110 transition-all duration-300">
+                        <span class="material-symbols-outlined text-3xl text-deep-teal group-hover:text-white transition-colors">badge</span>
                     </div>
-                    <h3 class="font-bold text-xl mb-2">Carpool</h3>
-                    <p class="text-sm text-slate-600">Join a recurring group ride for your semester schedule.</p>
+                    <h4 class="font-bold text-xl">Verify ID</h4>
+                    <p class="text-slate-500 text-sm px-6">Sign up using your MMU student email to join the trusted network.</p>
                 </div>
-                <div class="bg-pale-aqua p-8 rounded-[32px] hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group">
-                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:bg-deep-teal transition-colors">
-                        <span class="material-symbols-outlined text-3xl text-deep-teal group-hover:text-white">package_2</span>
+                <div class="reveal reveal-delay-2 space-y-4 group">
+                    <div class="text-6xl font-black text-mint-green group-hover:text-deep-teal transition-colors">02</div>
+                    <div class="w-16 h-16 bg-pale-aqua rounded-2xl flex items-center justify-center mx-auto group-hover:bg-deep-teal group-hover:scale-110 transition-all duration-300">
+                        <span class="material-symbols-outlined text-3xl text-deep-teal group-hover:text-white transition-colors">map</span>
                     </div>
-                    <h3 class="font-bold text-xl mb-2">Express</h3>
-                    <p class="text-sm text-slate-600">Need to send a charger or book to a friend? Use Express.</p>
+                    <h4 class="font-bold text-xl">Find & Book</h4>
+                    <p class="text-slate-500 text-sm px-6">Enter your destination and pick a driver that matches your schedule.</p>
                 </div>
-                <div class="bg-mint-green/30 p-8 rounded-[32px] hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group border border-mint-green/50">
-                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:bg-deep-teal transition-colors">
-                        <span class="material-symbols-outlined text-3xl text-deep-teal group-hover:text-white">verified_user</span>
+                <div class="reveal reveal-delay-3 space-y-4 group">
+                    <div class="text-6xl font-black text-mint-green group-hover:text-deep-teal transition-colors">03</div>
+                    <div class="w-16 h-16 bg-pale-aqua rounded-2xl flex items-center justify-center mx-auto group-hover:bg-deep-teal group-hover:scale-110 transition-all duration-300">
+                        <span class="material-symbols-outlined text-3xl text-deep-teal group-hover:text-white transition-colors">savings</span>
                     </div>
-                    <h3 class="font-bold text-xl mb-2">Safety+</h3>
-                    <p class="text-sm text-slate-600">Every ride is tracked and insured for student peace of mind.</p>
+                    <h4 class="font-bold text-xl">Ride & Save</h4>
+                    <p class="text-slate-500 text-sm px-6">Travel together, split the fuel cost, and arrive safely at your gate.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="how-it-works" class="py-24 max-w-7xl mx-auto px-8 text-center">
-        <h2 class="text-3xl font-black mb-16">Simple. Safe. Student-built.</h2>
-        <div class="grid md:grid-cols-3 gap-16">
-            <div class="space-y-4">
-                <div class="text-4xl font-black text-mint-green">01</div>
-                <h4 class="font-bold text-xl">Verify ID</h4>
-                <p class="text-slate-500 text-sm px-6">Sign up using your MMU student email to join the trusted network.</p>
-            </div>
-            <div class="space-y-4">
-                <div class="text-4xl font-black text-mint-green">02</div>
-                <h4 class="font-bold text-xl">Find & Book</h4>
-                <p class="text-slate-500 text-sm px-6">Enter your destination and pick a driver that matches your schedule.</p>
-            </div>
-            <div class="space-y-4">
-                <div class="text-4xl font-black text-mint-green">03</div>
-                <h4 class="font-bold text-xl">Ride & Save</h4>
-                <p class="text-slate-500 text-sm px-6">Travel together, split the fuel cost, and arrive safely at your gate.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-slate-900 text-white pt-20 pb-10 rounded-t-[60px]">
+    <footer class="bg-slate-900 text-white pt-20 pb-10">
         <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-slate-800 pb-16">
             <div class="col-span-1 md:col-span-2 space-y-6">
                 <span class="text-2xl font-black text-mint-green tracking-tighter">MMU RideShare</span>
                 <p class="text-slate-400 max-w-sm leading-relaxed">
-                    Designed for students at Multimedia University Malacca. We are committed to making campus commutes affordable and sustainable.
+                    A community-driven carpooling platform built by students for students at Multimedia University Malacca.
                 </p>
             </div>
             <div class="space-y-6">
                 <h5 class="font-bold text-lg">Contact Support</h5>
                 <ul class="text-slate-400 space-y-4 text-sm">
-                    <li class="flex items-center gap-3">
+                    <li class="flex items-center gap-3 hover:text-mint-green transition-colors">
                         <span class="material-symbols-outlined text-mint-green">mail</span>
                         hello@mmuride.com
                     </li>
-                    <li class="flex items-center gap-3">
+                    <li class="flex items-center gap-3 hover:text-mint-green transition-colors">
                         <span class="material-symbols-outlined text-mint-green">call</span>
                         +60 6-252 3500
                     </li>
-                    <li class="flex items-center gap-3">
+                    <li class="flex items-center gap-3 hover:text-mint-green transition-colors">
                         <span class="material-symbols-outlined text-mint-green">location_on</span>
                         MMU, Melaka Campus
                     </li>
@@ -197,22 +308,77 @@
             <div class="space-y-6">
                 <h5 class="font-bold text-lg">Quick Links</h5>
                 <ul class="text-slate-400 space-y-4 text-sm">
-                    <li><a href="#" class="hover:text-mint-green transition-colors">Privacy Policy</a></li>
-                    <li><a href="#" class="hover:text-mint-green transition-colors">Terms of Service</a></li>
-                    <li><a href="#" class="hover:text-mint-green transition-colors">Driver Agreement</a></li>
+                    <li><a href="#" class="hover:text-mint-green hover:translate-x-1 inline-block transition-all">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-mint-green hover:translate-x-1 inline-block transition-all">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-mint-green hover:translate-x-1 inline-block transition-all">Driver Agreement</a></li>
                 </ul>
             </div>
         </div>
-        
+
         <div class="max-w-7xl mx-auto px-8 mt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-slate-500 text-xs">© 2026 MMU RideShare Project. Built by Hashim.</p>
+            <p class="text-slate-500 text-xs">&copy; 2026 MMU RideShare Project. from mmu to u.</p>
             <div class="flex gap-6 text-slate-500">
-                <a href="#" class="hover:text-white transition-colors"><span class="material-symbols-outlined">public</span></a>
-                <a href="#" class="hover:text-white transition-colors"><span class="material-symbols-outlined">chat</span></a>
-                <a href="#" class="hover:text-white transition-colors"><span class="material-symbols-outlined">share</span></a>
+                <a href="#" class="hover:text-white hover:scale-110 transition-all"><span class="material-symbols-outlined">public</span></a>
+                <a href="#" class="hover:text-white hover:scale-110 transition-all"><span class="material-symbols-outlined">chat</span></a>
+                <a href="#" class="hover:text-white hover:scale-110 transition-all"><span class="material-symbols-outlined">share</span></a>
             </div>
         </div>
     </footer>
+
+    <script>
+        const APP_URL = 'https://badge-goofy-96169471.figma.site';
+
+        function navigateToApp(e) {
+            e.preventDefault();
+            window.open(APP_URL, '_blank');
+        }
+
+        document.querySelectorAll('.app-btn').forEach(el => {
+            el.addEventListener('click', navigateToApp);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 80) {
+                navbar.classList.add('bg-white/95', 'shadow-lg', 'shadow-deep-teal/5');
+                navbar.classList.remove('bg-white/80');
+            } else {
+                navbar.classList.remove('bg-white/95', 'shadow-lg', 'shadow-deep-teal/5');
+                navbar.classList.add('bg-white/80');
+            }
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.ripple').forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                this.style.setProperty('--mouse-x', e.clientX - rect.left + 'px');
+                this.style.setProperty('--mouse-y', e.clientY - rect.top + 'px');
+            });
+        });
+    </script>
 
 </body>
 </html>
